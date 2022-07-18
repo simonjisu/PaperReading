@@ -1,0 +1,807 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/PaperReading/NLP/2020-02-23-attentionisallyouneed3/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Attention Is All You Need - 3 - Soopace - Paper Reading</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#attention-is-all-you-need-3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Soopace - Paper Reading" class="md-header__button md-logo" aria-label="Soopace - Paper Reading" data-md-component="logo">
+      
+  <img src="../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Soopace - Paper Reading
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Attention Is All You Need - 3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu/PaperReading" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Soopace - Paper Reading" class="md-nav__button md-logo" aria-label="Soopace - Paper Reading" data-md-component="logo">
+      
+  <img src="../../img/logo/logo.png" alt="logo">
+
+    </a>
+    Soopace - Paper Reading
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu/PaperReading" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../XAI/">XAI</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="XAI" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          XAI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XAI/2019-09-18-introxai/" class="md-nav__link">
+        Explaining Explanations: An Overview of Interpretability of Machine Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XAI/2020-07-23-casm/" class="md-nav__link">
+        Classifier-agnostic saliency map extraction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XAI/2020-12-31-xaitutorial1/" class="md-nav__link">
+        Explainable Artificial Intelligence (XAI) - 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XAI/2021-01-14-xaitutorial2/" class="md-nav__link">
+        Explainable Artificial Intelligence (XAI) - 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XAI/2021-11-21-nbdt/" class="md-nav__link">
+        NBDT: Neural-Backed Decision Trees
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">NLP</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="NLP" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          NLP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2017-08-04-E2EMN/" class="md-nav__link">
+        End-to-End Memory Network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-04-04-nsmcbidreclstmselfattn/" class="md-nav__link">
+        A Structured Self-Attentive Sentence Embedding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-08-22-neuralnetworklm/" class="md-nav__link">
+        A Neural Probabilistic Language Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-01-14-attentionisallyouneed/" class="md-nav__link">
+        Attention Is All You Need - 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-02-02-attentionisallyouneed2/" class="md-nav__link">
+        Attention Is All You Need - 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Attention Is All You Need - 3
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
+        Mask-Predict: Parallel Decoding of Conditional Masked Language Models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
+        Hybrid Ranking Network for Text-to-SQL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../VISION/">VISION</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="VISION" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          VISION
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VISION/2020-03-12-deepinsidecnn/" class="md-nav__link">
+        Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VISION/2021-04-20-featurevisualization/" class="md-nav__link">
+        Feature Visualization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+                
+  <a href="https://github.com/simonjisu/PaperReading/edit/master/docs/NLP/2020-02-23-attentionisallyouneed3.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  
+
+
+
+<h1 id="attention-is-all-you-need-3">Attention Is All You Need - 3<a class="headerlink" href="#attention-is-all-you-need-3" title="Permanent link">&para;</a></h1>
+<p>Paper Link: <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></p>
+<p>이전 글: <a href="https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html">Attention Is All You Need - 2</a></p>
+<hr />
+<h1 id="5-models">5. Models<a class="headerlink" href="#5-models" title="Permanent link">&para;</a></h1>
+<h2 id="masking">Masking<a class="headerlink" href="#masking" title="Permanent link">&para;</a></h2>
+<p>지금까지 미뤄온 Attention 의 마스킹(Masking)을 이야기 해보려 한다. 마스킹이 필요한 이유는 두 가지다.</p>
+<ol>
+<li>
+<p>Decoder 의 Self Attention </p>
+<p>Decoder 에서는 이전의 타임 스텝(t-1)의 정보를 활용하여 다음 타임 스텝(t)의 정보를 예측하게 되는데 이를 <strong>자기회귀(auto-regressive)</strong>특성이라고 한다. 이러한 특성을 보존하기 위해서 이전 타임 스텝(t-1)을 입력으로 현재 타임 스텝(t)를 예측하려고 할 때, 다음 타임 스텝(t+1)의 정보를 참조하면 안된다. 따라서 이를 Scaled Dot-Product Attention 에서 마스킹을 통해, 음의 무한대(<code>-np.inf</code>) 값을 주어서 Softmax 값을 0으로 만들어 준다. </p>
+<p>예를 들어 <code>그림 1</code>처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, <span style="color:#e25252"><strong>Q</strong></span> 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 <span style="color:#5470cc"><strong>K</strong></span> 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. <span style="color:#e25252"><strong>Q</strong></span> 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.</p>
+</li>
+</ol>
+<p>{% include image.html id="1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn" desc="[그림 1] Decoder Sub-sequence Attention Masking" width="75%" height="auto" %}</p>
+<ol>
+<li>
+<p>실제 토큰의 길이</p>
+<p>앞서 말했듯이 RNN 처럼 recurrance 하지 않기 때문에 최대 입력/출력 길이를 정해야한다. 따라서 실제 문장은 길이가 4인데도 설정한 최대 길이 때문에 그 길이만큼 <code>Padding</code>을 하게 되는데, Attention 계산시 <code>Padding</code> 은 인위적으로 넣은 토큰이기 때문에 이를 무시해야 한다. </p>
+<p>예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 <code>그림 2</code>와 같다. 여기서는 마지막 토큰이 <code>Padding</code> 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드(<a href="https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py">GitHub</a> 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 <code>nan</code> 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다. </p>
+</li>
+</ol>
+<p>{% include image.html id="1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2" desc="[그림 2] 실제 토큰 길이에 대한 Masking" width="75%" height="auto" %}</p>
+<p>해당 모듈(Module) 코드는 다음과 같다.
+* <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L11">Encoder Layer</a>
+* <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L42">Decoder Layer</a>
+* <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L10">Encoder</a>
+* <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L54">Decoder</a></p>
+<h2 id="transformer-model">Transformer Model<a class="headerlink" href="#transformer-model" title="Permanent link">&para;</a></h2>
+<p>특이한 점이라면 마지막 예측 토큰을 출력하는 선형 변환 층(<code>projection</code>)을 임베딩 층으로 치환하는 방법이 있는데 이를 논문에서 Linear Weight Sharing이라고 했다. 또한, 문제에 따라서 Encoder층의 임베딩과 Decoder층의 임베딩을 공유 할 수도 있는데 Language Modeling 같은 문제가 그 예시라고 할 수 있다. 이를 논문에서 Embed Weight Sharing이라고 했다.</p>
+<p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L112"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
+<hr />
+<h1 id="6-loss-function">6. Loss Function<a class="headerlink" href="#6-loss-function" title="Permanent link">&para;</a></h1>
+<h2 id="label-smoothing">Label Smoothing<a class="headerlink" href="#label-smoothing" title="Permanent link">&para;</a></h2>
+<p>Discrete한 분포를 예측하는 방법은 주로 Cross Entropy를 많이 사용하지만 논문에서는 <a href="https://arxiv.org/abs/1512.00567">Rethinking the inception architecture for computer vision</a> 논문에서 언급한 Label Smoothing 기법을 활용했다. </p>
+<p>예측 확률 분포를 <strong>P</strong>, 정답/타겟 확률 분포(ground-truth distribution)를 <strong>Q</strong>라고 하겠다. <span class="arithmatex">\(x\)</span> 를 입력으로 예측 확률 질량함수 <code>p(y=k|x)</code> 에서 구한 확률(Softmax)을 타겟 확률 질량함수 <code>q(y=k|x)=1</code> 처럼 만드는 것이 원래의 최종목표다. 이제부터 <span class="arithmatex">\(x\)</span>를 생략해서 쓰겠다. Cross Entropy의 수식은 다음과 같다.</p>
+<div class="arithmatex">\[Loss = -\sum_{k=1}^{K} \log\big(p(k) \big) q(k)\]</div>
+<p>Cross Entropy 를 최소화 하는 것은 <span class="arithmatex">\(k\)</span> 라벨에 해당하는 log-likelihood 의 기댓값을 <span class="arithmatex">\(q(k)\)</span>로 최대화 하는 것과 같다. 그리고 Cross Entropy 는 Softmax 에 사용되는 예측값의 로짓(logit, <span class="arithmatex">\(z_k\)</span>)에 대해 미분을 구할 수 있는데, 그 미분값은 다음과 같으며 -1 과 1 사이의 치역을 갖는다.</p>
+<div class="arithmatex">\[\begin{aligned} \dfrac{\partial Loss}{\partial z_k} = q(k)\big(p(k)-1\big) \end{aligned}\]</div>
+<p>정답 라벨(ground-truth label)이 <span class="arithmatex">\(y\)</span>인 예시를 들어봅자. 논문에서는 라벨 <span class="arithmatex">\(y\)</span>에 해당하는 로짓(<span class="arithmatex">\(z_y\)</span>) 값이 다른 라벨 <span class="arithmatex">\(k\)</span>의 로짓(<span class="arithmatex">\(z_k\)</span>) 값에 비해 월등히 클 수록 2가지 문제가 생긴다고 한다. </p>
+<ol>
+<li>오버피팅(over-fitting)이 될 가능성이 있다. 만약에 모델이 전체 확률 분포(모든 라벨)를 학습 시, 일반화(generalize)를 보장할 수 없다.</li>
+<li>
+<p>이러한 구조는 제일 큰 로짓 값과 상대적으로 작은 로짓 값의 차이를 점점 더 크게 만들도록 학습한다. 이는 미분 값을 항상 0에 가깝게 만들어 가중치 업데이트가 안된다. 다음 미분의 수식에서 확인 할 수 있듯이, 정답 라벨 <span class="arithmatex">\(y\)</span> 의 로짓 값이 높을 수록, 그 확률은 1 에 가까워 경사(gradient)가 0에 가깝다.</p>
+<div class="arithmatex">\[\begin{aligned} \dfrac{\partial Loss}{\partial z_y} &amp;= -q(z_y)\cdot\frac{1}{p(z_y)} \times p(z_y)\big(1-p(z_y) \big) \\ &amp;= -q(z_y)+q(z_y)p(z_y) \\&amp;= p(z_y) -1 \end{aligned}\]</div>
+</li>
+</ol>
+<p>결론적으로 말하면, 정답 라벨에 대해서 너무 확실한 예측을 내놓는 다는 것이다. 따라서 이러한 효과를 줄이기 위해서 해당 논문에서는 색다른 정답 확률 분포를 이야기 하는데, 기존의 <code>q(k)</code>의 분포는 다음과 같다.</p>
+<div class="arithmatex">\[q(k)=\delta_{k,y} \begin{cases} 1 \quad \text{if } k=y \\ 0 \quad \text{else} \end{cases}\]</div>
+<p>이를 새로운 <code>q'(k)</code>로 치환하게 된다. <span class="arithmatex">\(\epsilon\)</span>은 Smoothing을 위한 변수다.</p>
+<div class="arithmatex">\[q'(k) = (1-\epsilon)\delta_{k,y} + \epsilon \cdot u(k)\]</div>
+<p><code>u(k)</code> 의 분포는 훈련데이터와 무관한 분포이며, 보통 <code>u(k) = 1/K</code>인 Uniform Distribution 을 사용한다. <code>q'(k)</code>와 같은 정규화의 한 방법으로 논문에서는 이를 <strong>Label-Smoothing Regularization (LSR)</strong> 이라고 제시했다.</p>
+<p>LSR 의 목적은 원래 목표인 타겟 라벨을 맞추는 목적과 정답 라벨의 로짓(logit) 값이 학습과정에서 과도하게 다른 로짓 값보다 커지는 현상을 방지하는 것이다. 수식을 약간 변형하여 LSR 를 다른 관점에서 볼 수 있다.</p>
+<div class="arithmatex">\[\begin{aligned} LSR = H(p, q') &amp;= -\sum_{k=1}^K \log \big( p(k)\big) q'(k) \\ &amp;= -\sum_{k=1}^K \log \big( p(k)\big)\big( (1-\epsilon)\delta_{k,y} + \epsilon u(k) \big) \\ &amp;= (1-\epsilon)\big(-\sum_{k=1}^K \log \big( p(k)\big)\delta_{k,y} \big) \epsilon \big( -\sum_{k=1}^K \log \big( p(k)\big)u(k) \big) \\ &amp;= (1-\epsilon) H(q, p) + \epsilon H(u, p) \end{aligned}\]</div>
+<p>LSR 은 기존에 Cross Entropy <code>H(q, p)</code>를 한 쌍의 <code>H(q, p)</code> 와 <code>H(u, p)</code>로 대체한 것이다. Smoothing Factor 인 <span class="arithmatex">\(\epsilon\)</span>의 크기의 여부에 따라 정규화의 정도가 달라진다.</p>
+<p><strong>Transformer</strong> 에서도 해당 방법을 정규화 목적으로 <span class="arithmatex">\(K\)</span> 는 타겟 단어장(vocab)의 크기, <span class="arithmatex">\(\epsilon\)</span>=0.1 로 사용했다.</p>
+<p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/labelsmooth.py#L5"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
+<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://arxiv.org/abs/1512.00567">Rethinking the Inception Architecture for Computer Vision</a></li>
+<li><a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html#label-smoothing">The Annotated Transformer</a></li>
+</ul>
+<hr />
+<h1 id="7-optimizer">7. Optimizer<a class="headerlink" href="#7-optimizer" title="Permanent link">&para;</a></h1>
+<h2 id="learning-rate-variation">Learning Rate Variation<a class="headerlink" href="#learning-rate-variation" title="Permanent link">&para;</a></h2>
+<p>논문에서는 Adam Optimizer 를 기반으로 다양한 학습률을 적용하여 사용했다. 학습률 변화의 수식은 다음과 같다.</p>
+<div class="arithmatex">\[lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \cdot \text{warmup_steps}^{-1.5} )\]</div>
+<p>해당 수식에 따르면 처음 warmup_steps 동안 학습률은 가파르게 상승하다가 차후에 천천히 하강하게 된다.</p>
+<p>{% include image.html id="1d0xw7_xjr1rv7-SjuxQKRmML4oio561j" desc="[그림 3] hidden 크기 및 warmup steps 에 따른 학습률의 변화" width="75%" height="auto" %}</p>
+<p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/warmupoptim.py#L1"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
+<hr />
+<h1 id="8-training-multi30k-with-transformer">8. Training Multi30k with Transformer<a class="headerlink" href="#8-training-multi30k-with-transformer" title="Permanent link">&para;</a></h1>
+<p>PyTorch의 <code>torchtext</code>에 있는 Multi30k 데이터 세트(영어-독일어 번역)로 테스트 해보았다. 큰 데이터는 아니기 때문에, NVIDIA GTX 1080 ti 로 약 36분 훈련시켰다. 기존의 RNN 으로 훈련시키는 것 보다 월등히 빨랐다. 모델에서 Attention에 대한 그림도 <a href="https://github.com/simonjisu/annotated-transformer-kr">github</a>에 올려두었으니 확인해보길 바란다.</p>
+<p>{% include image.html id="1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa" desc="[그림 4] Multi30k 성능 테스트" width="100%" height="auto" %}</p>
+
+              
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://utteranc.es/client.js"
+        repo="simonjisu/utterances_comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Reload on palette change -->
+  <script>
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object")
+      if (palette.color.scheme === "slate") {
+        var giscus = document.querySelector("script[src*=giscus]")
+        giscus.setAttribute("data-theme", "dark") 
+      }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../2020-02-02-attentionisallyouneed2/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Attention Is All You Need - 2" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Attention Is All You Need - 2
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2020-07-19-maskpredict/" class="md-footer__link md-footer__link--next" aria-label="Next: Mask-Predict: Parallel Decoding of Conditional Masked Language Models" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Mask-Predict: Parallel Decoding of Conditional Masked Language Models
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.prune", "toc.follow"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
