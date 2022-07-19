@@ -1,4 +1,12 @@
-# Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
+---
+title: "Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps"
+hide:
+  - tags
+tags:
+  - Saliency Map
+  - XAI
+  - Explainable AI
+---
 
 Paper Link: [Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps](https://arxiv.org/abs/1312.6034)
 

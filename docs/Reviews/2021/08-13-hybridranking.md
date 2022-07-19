@@ -1,22 +1,33 @@
-# Hybrid Ranking Network for Text-to-SQL
+---
+title: "Hybrid Ranking Network for Text-to-SQL"
+hide:
+  - tags
+tags:
+  - Hybrid Ranking
+  - Text-to-SQL
+  - HydraNet
+---
 
-Paper Link: [https://arxiv.org/abs/2008.04759](https://arxiv.org/abs/2008.04759)
 
-# Abstract
+## Abstract
 
-문제를 column-wise ranking, decoding 그리고 column-wise 결과물을 SQL 룰에 따라서 모으는 것으로 나눴다.
+Hybrid Ranking Network for Text-to-SQL[^1] 제안. 문제를 column-wise ranking, decoding 그리고 column-wise 결과물을 SQL 룰에 따라서 모으는 것으로 나눴다.
+
+[^1]: [Hybrid Ranking Network for Text-to-SQL](https://arxiv.org/abs/2008.04759)
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
-Relational database는 실제 세상에서 널리 사용되고 있다. SQL은 많이 사용되고 있으나 보통 이를 마스터하기엔 어렵다. 자연어를 통해서 데이터베이스와 소통하는 방법을 오랫동안 연구되어 왔다. 이를 일반화 하면 **"Natural Language Interface to Databases(NLIDBs)"** 라는 분야다.
+Relational database는 실제 세상에서 널리 사용되고 있다. SQL은 많이 사용되고 있으나 보통 이를 마스터하기엔 어렵다. 자연어를 통해서 데이터베이스와 소통하는 방법을 오랫동안 연구되어 왔다. 이를 일반화 하면 **"Natural Language Interface to Databases(NLIDBs)"**[^2] 라는 분야다.
 
-- [Natural Language Interfaces to Databases – An Introduction](https://arxiv.org/abs/cmp-lg/9503016)
+[^2]: [Natural Language Interfaces to Databases – An Introduction](https://arxiv.org/abs/cmp-lg/9503016)
 
-최근에 딥러닝 기반의 방법들이 이를 해결해보고자 했는데 이를 "NL-to-SQL" 혹은 "Text-to-SQL"이라고 하는데, 이 논문에선 Text-to-SQL 문제를 WikiSQL 데이터로 실험한 것에 대해서만 다룬다.
-- WikiSQL: [https://github.com/salesforce/WikiSQL](https://github.com/salesforce/WikiSQL)
+최근에 딥러닝 기반의 방법들이 이를 해결해보고자 했는데 이를 "NL-to-SQL" 혹은 "Text-to-SQL"이라고 하는데, 이 논문에선 Text-to-SQL 문제를 WikiSQL[^3] 데이터로 실험한 것에 대해서만 다룬다.
+
 - 제약 조건: 테이블의 내용을 알고 각 질의(Question)는 하나의 테이블만 해당함
+
+[^3]: [WikiSQL GitHub](https://github.com/salesforce/WikiSQL)
 
 WikiSQL데이터에서 이전에 제안된 연구들은 여러 난관이 있었다.
 
@@ -36,15 +47,13 @@ WikiSQL데이터에서 이전에 제안된 연구들은 여러 난관이 있었�
 - 먼저, question과 column pair 형태가 BERT 혹은 RoBERTa와 sentence pair training task와 유사하기 때문에 효율적으로 이용할 수 있다.
 - 둘째, 하나의 칼럼을 인코딩에 사용하기 때문에 `[CLS]` 토큰 벡터에는 모든 정보(question과 column)를 포함하고 있다. 따라서 더 이상 추가 pooling 혹은 더 복잡한 layer를 추가할 필요가 없다.
 
----
-
-# 2. Related Work
+## 2. Related Work
 
 생략
 
-# 3. Approach
+## 3. Approach
 
-## 3.1 Input Representation
+### 3.1 Input Representation
 
 질문 $q$ 와 column 후보 $c_1, c_2, \cdots, c_k$ 가 주어졌을 때, 입력 정보쌍를 다음과 같이 구성할 수 있다.
 
@@ -56,7 +65,7 @@ $$\text{[CLS]}, x_1, x_2, \cdots, x_m, \text{[SEP]}, y_1, y_2, \cdots, y_n, \tex
 
 여기서 $x_1, x_2, \cdots, x_m$은 $\text{Concat}(\phi_{c_i}, t_{c_i}, c_i)$을 토큰화 한 것, $y_1, y_2, \cdots, y_n$는 질문 $q$에 대해 토큰화 한 것이다.
 
-## 3.2 SQL Query Representation and Tasks
+### 3.2 SQL Query Representation and Tasks
 
 이 논문에서 SQL은 nested 구조가 아니기 때문에 다음과 같은 폼을 가진다(WikiSQL 데이터 세트의 제약조건).
 
@@ -91,7 +100,7 @@ $$P(z \vert q) = \sum_{c_i} P(z \vert c_i, q)P(c_i \vert q)$$
 - SELECT 구문의 개수 $n_s$에 대해서는 $P(n_s \vert q) = \sum_{c_i} P(n_s \vert c_i, q) P(c_i \vert q)$로 정의
 - WHERE 구문의 개수 $n_w$에 대해서는 $P(n_w \vert q) = \sum_{c_i} P(n_w \vert c_i, q) P(c_i \vert q)$로 정의
 
-## 3.3 Column Ranking
+### 3.3 Column Ranking
 
 각 질문 $q$에 대해서 $\mathcal{S}_q$를 SELECT 구문과 연관된 칼럼, $\mathcal{W}_q$를 WHERE 구문과 연관된 칼럼이라고 하면, 쿼리문에 나온 칼럼들을 $\mathcal{R}_q \doteq \mathcal{S}_q \cup \mathcal{R}_q$ 로 정의할 수 있다. 마지막으로 후보 칼럼 집합을 $\mathcal{C}_q = \lbrace c_1, c_2, \cdots, c_k \rbrace$이라고 정의 할 수 있으며, 당연하게도 $\mathcal{R}_q \subseteq \mathcal{C}_q$ 관계가 성립된다.
 
@@ -119,7 +128,7 @@ P(c_i \in \mathcal{S}_q \vert q) &= \text{sigmoid}(w_{sc} \cdot h_{\text{[CLS]}}
 
     $$\hat{n}_w = \underset{n_w}{\arg \max} P(n_w \vert q) = \sum_{c_i \in \mathcal{C}_q} P(n_s \vert c_i, q) P(c_i \in \mathcal{R}_q \vert q)$$
 
-## 3.4 Training and Inference
+### 3.4 Training and Inference
 
 **Training** 단계에서 labeled samples를 먼저 $n_i$ column-question samples 로 바꾼다.
 
@@ -143,22 +152,26 @@ SQL 쿼리 레이블 $(q\_i, \mathcal{C}\_{q\_i})$은 column-question samples와
 
 4. $\hat{\mathcal{T}} = \lbrace \hat{t}\_1, \hat{t}\_2, \cdots, \hat{t}\_{n\_t} \rbrace$를 모든 예측된 칼럼 $\hat{sc}\_i, \hat{wc}\_i$의 테이블 집합이라고 정의하면, FROM 구문은 $[\hat{t}\_1, \hat{t}\_2, \cdots, \hat{t}\_{n_t}]$에 해당된다.
 
-## 3.5 Execution-guided decoding
+### 3.5 Execution-guided decoding
 
 Neural Network 모델은 입력 질문, column-value 관계에서 추출된 syntactic과 semantic 정보로 SQL 쿼리를 예측한다. 하지만, 런타임에서 좋은 예측을 못내고 있는데 그 이유는 다음과 같다.
 1. 데이터베이스의 값과 칼럼들은 이산적인 관계를 가지며 특별한 제약도 없다. 따라서 매핑된 칼럼들은 값이나 성격이 수시로 바뀔 수 있다. 훈련된 모델은 최신 데이터베이스 정보를 놓쳐서 예전 정보를 기반으로 예측할 가능성이 있다.
 2. 각 Task에 해당하는 모델의 출력들은 독립적으로 예측한 것이다. 따라서 말이 안되는 조합을 생성할 수 도 있다. string-type의 칼럼에 aggregation operator, greater-than이라는 condition operator를 예측하는 등을 예로 들 수 있다. 이런 케이스들은 가능성을 원천적으로 제거해야한다.
 
-이러한 이슈를 해결하기 위해 [Wang et al. 2018](https://arxiv.org/abs/1807.03100)에서는 Execution-guided decoding(EG)를 제안했다. 이 논문에서는 SQL 쿼리문 생성시, 만약 데이터베이스 엔진이 런타임 에러가 나거나 빈 출력을 반환 시, 수정을 해주는 아이디어를 제안했다.
+이러한 이슈를 해결하기 위해 Wang et al. 2018[^4] 에서는 Execution-guided decoding(EG)를 제안했다. 이 논문에서는 SQL 쿼리문 생성시, 만약 데이터베이스 엔진이 런타임 에러가 나거나 빈 출력을 반환 시, 수정을 해주는 아이디어를 제안했다.
 
-{% include image.html id="1NJelQlAmhTJdr62nH40QwTDul3kkUMY5" desc="Execution Guided Decoding 알고리즘" width="75%" height="auto" %}
+[^4]: [Wang et al. 2018](https://arxiv.org/abs/1807.03100)
 
-# 4. Experiment
+Execution Guided Decoding 알고리즘은 다음과 같다.
 
-{% include image.html id="1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN" desc="Table 1" width="100%" height="auto" %}
+![Figure1](https://drive.google.com/uc?export=view&id=1NJelQlAmhTJdr62nH40QwTDul3kkUMY5){ height="90%" }
 
-- Logical form accuracy를 봤을 때, WikiSQL 데이터 세트에서 우수함을 보인다.
+## 4. Experiment
 
-{% include image.html id="1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp" desc="Table 2" width="100%" height="auto" %}
+Logical form accuracy를 봤을 때, WikiSQL 데이터 세트에서 우수함을 보인다.
 
-- execution accuracy에서 볼 수 있듯이, HydraNet은 generalization에서도 더 우수함을 보였다.
+![Table1](https://drive.google.com/uc?export=view&id=1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN){ width="100%" }
+
+Execution accuracy에서 볼 수 있듯이, HydraNet은 generalization에서도 더 우수함을 보였다.
+
+![Table2](https://drive.google.com/uc?export=view&id=1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp){ width="100%" }

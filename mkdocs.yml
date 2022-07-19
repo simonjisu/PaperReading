@@ -9,7 +9,9 @@ theme:
   palette:
     primary: indigo
   features:
-    - navigation.prune
+    - navigation.tabs
+    - navigation.tabs.sticky
+    # - navigation.tracking
     - toc.follow
 
 markdown_extensions:
@@ -44,12 +46,13 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
-  - tags
+  - tags:
+      tags_file: Reviews/index.md
   - search
   - section-index
   - literate-nav:
       nav_file: SUMMARY.md
-      implicit_index: true
+      implicit_index: false
   # - glightbox:
   #      touchNavigation: true
   #      loop: false

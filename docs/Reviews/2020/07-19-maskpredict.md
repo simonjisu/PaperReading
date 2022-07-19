@@ -1,3 +1,13 @@
+---
+title: "Mask-Predict: Parallel Decoding of Conditional Masked Language Models"
+hide:
+  - tags
+tags:
+  - NLP
+  - Decoding
+  - Masked Language Models
+---
+
 # Mask-Predict: Parallel Decoding of Conditional Masked Language Models
 
 Paper Link: [Mask-Predict: Parallel Decoding of Conditional Masked Language Models](https://arxiv.org/abs/1904.09324)
