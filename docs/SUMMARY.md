@@ -1,4 +1,4 @@
-* [Welcome](home.md)
+* [Welcome](index.md)
 * [Reviews](Reviews/index.md)
     * [2022](Reviews/2022/)
     * [2021](Reviews/2021/)

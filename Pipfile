@@ -8,7 +8,6 @@ mkdocs = "*"
 mkdocs-material = "*"
 mkdocs-literate-nav = "*"
 mkdocs-section-index = "*"
-mkdocs-glightbox = "*"
 colorama = "*"
 
 [dev-packages]
