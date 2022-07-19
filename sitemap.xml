@@ -1,103 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/</loc>
-         <lastmod>2022-07-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>None</loc>
-         <lastmod>2022-07-18</lastmod>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/home/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2017-08-04-E2EMN/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2018-04-04-nsmcbidreclstmselfattn/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2017/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2018-08-22-neuralnetworklm/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2017/08-04-E2EMN/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2020-01-14-attentionisallyouneed/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2018/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2020-02-02-attentionisallyouneed2/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2018/04-04-nsmcbidreclstmselfattn/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2020-02-23-attentionisallyouneed3/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2018/08-22-neuralnetworklm/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2020-07-19-maskpredict/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2019/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/NLP/2021-08-13-hybridranking/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2019/09-18-introxai/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/VISION/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/VISION/2020-03-12-deepinsidecnn/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/01-14-attentionisallyouneed/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/VISION/2021-04-20-featurevisualization/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/03-12-deepinsidecnn/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/07-19-maskpredict/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/2019-09-18-introxai/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/07-23-casm/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/2020-07-23-casm/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2020/12-31-xaitutorial/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/2020-12-31-xaitutorial1/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/2021-01-14-xaitutorial2/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/04-12-spider/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/PaperReading/XAI/2021-11-21-nbdt/</loc>
-         <lastmod>2022-07-18</lastmod>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/04-20-featurevisualization/</loc>
+         <lastmod>2022-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/05-14-bridge/</loc>
+         <lastmod>2022-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/08-13-hybridranking/</loc>
+         <lastmod>2022-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2021/11-21-nbdt/</loc>
+         <lastmod>2022-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/2022/</loc>
+         <lastmod>2022-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/PaperReading/Reviews/</loc>
+         <lastmod>2022-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
