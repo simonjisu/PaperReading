@@ -23,7 +23,7 @@ tags:
 
     **WikiSQL**(Zhong et al., 2017)
 
-    - 심플한 쿼리: 한 개의 칼럼에 대한 `SELECT`, 집계(AGGREGATION), 조건문(`WHERE`) 밖에 없음
+    - 심플한 쿼리: 한 개의 칼럼에 대한 `SELECT`, 집계(`AGGREGATION`), 조건문(`WHERE`) 밖에 없음
     - 하나의 테이블 밖에 없음
     - 자주 쓰이는 `JOIN`, `GROUP BY`, `ORDER BY` 등 부재
 
