@@ -61,5 +61,3 @@ extra:
   analytics:
     provider: google
     property: G-LJESYTRE7M
-extra_css:
-  - stylesheets/extra.css
