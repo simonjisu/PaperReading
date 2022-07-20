@@ -1,5 +1,5 @@
 site_name: Soopace - Paper Reading
-site_url: https://simonjisu.github.io/PaperReading/
+site_url: https://simonjisu.github.io/PaperReading
 repo_url: https://github.com/simonjisu/PaperReading
 
 theme:
@@ -61,6 +61,5 @@ extra:
   analytics:
     provider: google
     property: G-LJESYTRE7M
-  # homepage: https://simonjisu.github.io/PaperReading/home/
 extra_css:
   - stylesheets/extra.css
